@@ -1,0 +1,82 @@
+---
+interface Props {
+    title: string;
+    href: string;
+    author: string;
+    authorInitials: string;
+    time: string;
+    excerpt: string;
+    comments: number;
+    category: string;
+    visibility: "public" | "private";
+    showReport?: boolean;
+}
+
+const {
+    title,
+    href,
+    author,
+    authorInitials,
+    time,
+    excerpt,
+    comments,
+    category,
+    visibility,
+    showReport = false,
+} = Astro.props;
+
+const isPrivate = visibility === "private";
+const commentsLabel =
+    comments === 1 ? "1 comentario" : `${comments} comentarios`;
+
+const shareIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.4M8.2 13.2l7.6 4.4"/></svg>`;
+const commentIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-8l-4 3v-3H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>`;
+const lockIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>`;
+---
+
+<article class="thread">
+    <div class="thread__tags">
+        <span class="tag">{category}</span>
+        {isPrivate ? (
+            <span class="tag tag--private">
+                <span set:html={lockIcon} />
+                Privado
+            </span>
+        ) : (
+            <span class="tag">Público</span>
+        )}
+    </div>
+
+    <h3 class="thread__title">
+        <a href={href}>{title}</a>
+    </h3>
+
+    <div class="thread__meta">
+        <span class="avatar">{authorInitials}</span>
+        <a href="">
+            <strong>{author}</strong>
+        </a>
+        <span aria-hidden="true">·</span>
+        <time>{time}</time>
+    </div>
+
+    <p class="thread__excerpt">{excerpt}</p>
+
+    <div class="thread__footer">
+        <a href={href} class="link-action">
+            <span set:html={commentIcon} />
+            {commentsLabel}
+        </a>
+        <div class="thread__actions">
+            <button type="button" class="link-action">
+                <span set:html={shareIcon} />
+                Compartir
+            </button>
+            {showReport && (
+                <button type="button" class="link-action">
+                    Reportar
+                </button>
+            )}
+        </div>
+    </div>
+</article>

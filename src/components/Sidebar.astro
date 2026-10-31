@@ -1,0 +1,55 @@
+---
+const categories = [
+    { name: "Ingeniería", count: 328, href: "/t/ingenieria" },
+    { name: "Frontend", count: 214, href: "/t/frontend" },
+    { name: "Bases de datos", count: 186, href: "/t/bases-de-datos" },
+    { name: "DevOps", count: 142, href: "/t/devops" },
+    { name: "Demos", count: 97, href: "/t/demos" },
+    { name: "Carrera", count: 83, href: "/t/carrera" },
+];
+
+const guidelines = [
+    "Sé amable. Critica ideas, no personas.",
+    "Comparte contexto, no solo enlaces.",
+    "Construye en público. Respeta la privacidad.",
+];
+---
+
+<aside class="sidebar" aria-label="Información de la comunidad">
+    <section class="panel" aria-labelledby="categories-title">
+        <h2 class="panel__title" id="categories-title">
+            Explorar categorías
+        </h2>
+        <ul class="panel__list">
+            {categories.map((c) => (
+                <li>
+                    <a href={c.href}>
+                        <span>{c.name}</span>
+                        <span class="panel__count">{c.count}</span>
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </section>
+
+    <section class="panel guidelines" aria-labelledby="guidelines-title">
+        <h2 class="panel__title" id="guidelines-title">
+            Menos ruido, más señal
+        </h2>
+        <p>Un rincón tranquilo de internet para conversar sobre con calma.</p>
+        <ol>
+            {guidelines.map((g, i) => (
+                <li>
+                    <span class="guidelines__index">
+                        {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span>{g}</span>
+                </li>
+            ))}
+        </ol>
+        <a href="/guidelines" class="guidelines__link">
+            Leer las pautas de la comunidad
+            <span aria-hidden="true">↗</span>
+        </a>
+    </section>
+</aside>

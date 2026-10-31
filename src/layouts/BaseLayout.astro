@@ -1,0 +1,29 @@
+---
+import "../styles/global.css";
+import "../styles/components.css";
+import "../styles/layout.css";
+import Header from "../components/Hearder.astro";
+
+interface Props {
+    title?: string;
+    showHeader?: boolean;
+}
+const { title, showHeader = true } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="Conversaciones técnicas, con menos ruido y más señal."
+        />
+        <title>LogCod</title>
+    </head>
+    <body>
+        {showHeader && <Header />}
+        <slot />
+    </body>
+</html>

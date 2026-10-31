@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const categories = [
+    "Ingeniería",
+    "Frontend",
+    "Bases de datos",
+    "DevOps",
+    "Demos",
+    "Carrera",
+];
+---
+
+<BaseLayout title="Nuevo hilo">
+    <main class="main">
+        <div class="profile-narrow">
+            <div class="page-intro">
+                <div>
+                    <h1>Crear hilo</h1>
+                    <p>
+                        Comparte una pregunta, una idea o una lección aprendida.
+                    </p>
+                </div>
+            </div>
+
+            <form
+                class="auth__form"
+                action="/api/threads"
+                method="post"
+                style="gap: var(--space-6)"
+            >
+                <div class="field">
+                    <label class="field__label" for="thread-title">
+                        Título
+                    </label>
+                    <input
+                        id="thread-title"
+                        name="title"
+                        type="text"
+                        class="input"
+                        style="height: 3rem; font-size: 1.125rem; font-weight: 600"
+                        placeholder="Un título útil para el hilo"
+                        required
+                    />
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="thread-category">
+                        Categoría
+                    </label>
+                    <select id="thread-category" name="category" class="select">
+                        {categories.map((c) => (
+                            <option>{c}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <fieldset class="field" style="border:0;padding:0;margin:0">
+                    <legend
+                        class="field__label"
+                        style="margin-bottom: var(--space-2)"
+                    >
+                        Visibilidad
+                    </legend>
+                    <div class="visibility">
+                        <label class="visibility__option">
+                            <input
+                                type="radio"
+                                name="visibility"
+                                value="public"
+                                checked
+                            />
+                            <span>
+                                <span
+                                    class="visibility__title"
+                                    style="display:block"
+                                >
+                                    Público
+                                </span>
+                                <span class="visibility__desc">
+                                    Todos pueden ver este hilo.
+                                </span>
+                            </span>
+                        </label>
+                        <label class="visibility__option">
+                            <input
+                                type="radio"
+                                name="visibility"
+                                value="private"
+                            />
+                            <span>
+                                <span
+                                    class="visibility__title"
+                                    style="display:block"
+                                >
+                                    Privado
+                                </span>
+                                <span class="visibility__desc">
+                                    Solo lo ven tus amigos confirmados.
+                                </span>
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <div class="editor"></div>
+
+                <div class="thread__actions" style="justify-content: flex-end">
+                    <a href="/" class="btn btn--ghost">
+                        Cancelar
+                    </a>
+                    <button type="submit" class="btn btn--primary">
+                        Publicar hilo
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+</BaseLayout>

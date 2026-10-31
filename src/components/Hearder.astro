@@ -1,0 +1,52 @@
+---
+const icons = {
+    search: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>`,
+    plus: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>`,
+    chevron: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`,
+};
+---
+
+<header class="site-header">
+    <div class="site-header__inner">
+        <a href="/" class="brand" aria-label="LogCod, inicio">
+            <span>LogCod</span>
+        </a>
+
+        <form class="header-search" role="search" action="/search" method="get">
+            <div class="input-wrap">
+                <span class="input-wrap__icon" set:html={icons.search} />
+                <label class="visually-hidden" for="global-search">
+                    Buscar hilos, personas o etiquetas
+                </label>
+                <input
+                    id="global-search"
+                    name="q"
+                    type="search"
+                    class="input input--search"
+                    placeholder="Buscar hilos, personas, etiquetas…"
+                />
+            </div>
+        </form>
+
+        <div class="header-actions">
+            <a href="/new" class="btn btn--primary">
+                + Crear hilo
+            </a>
+            <a href="/" class="user-menu" aria-label="Tu perfil">
+                <span class="avatar">AA</span>
+                <span set:html={icons.chevron} />
+            </a>
+        </div>
+    </div>
+</header>
+
+<style>
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+</style>

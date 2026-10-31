@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const hasError = Astro.url.searchParams.get("error") === "1";
+---
+
+<BaseLayout title="Iniciar sesión" showHeader={false}>
+    <main class="auth">
+        <section class="auth__card" aria-labelledby="login-title">
+            <a href="/" class="brand" aria-label="Stackline, inicio">
+                <span>LogCod</span>
+            </a>
+
+            <div>
+                <h1 class="auth__title" id="login-title">
+                    Inicia sesión LogCod
+                </h1>
+                <p class="auth__sub">
+                    ¿No tienes cuenta? <a href="/register">Regístrate</a>
+                </p>
+            </div>
+
+            {hasError && (
+                <div class="alert" role="alert">
+                    <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.75"
+                        stroke-linecap="round"
+                        aria-hidden="true"
+                        style="flex-shrink:0;margin-top:2px"
+                    >
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 8v4M12 16h.01" />
+                    </svg>
+                    <span>
+                        Credenciales no válidas. Revisa tu usuario y contraseña
+                        e inténtalo de nuevo.
+                    </span>
+                </div>
+            )}
+
+            <form class="auth__form" method="post" action="/api/login">
+                <div class="field">
+                    <label class="field__label" for="username">
+                        Usuario
+                    </label>
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        class="input"
+                        autocomplete="username"
+                        required
+                    />
+                </div>
+
+                <div class="field">
+                    <label class="field__label" for="password">
+                        Contraseña
+                    </label>
+                    <div class="password-wrap">
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            class="input"
+                            autocomplete="current-password"
+                            required
+                        />
+                        <button
+                            type="button"
+                            class="btn btn--ghost btn--icon"
+                            aria-label="Mostrar contraseña"
+                            aria-controls="password"
+                        >
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.75"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                            >
+                                <path d="M12 3 4 7v6c0 4.5 3.4 7.6 8 8 4.6-.4 8-3.5 8-8V7l-8-4z" />
+                                <path d="M9.5 12a2.5 2.5 0 1 0 5 0 2.5 2.5 0 1 0-5 0" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn--primary btn--wide btn--block"
+                >
+                    Iniciar sesión
+                </button>
+            </form>
+
+            <p class="auth__tagline">
+                Conversaciones con criterio. Bienvenida de nuevo.
+            </p>
+        </section>
+    </main>
+</BaseLayout>
+
+<script>
+    const toggle = document.querySelector<HTMLButtonElement>(
+        ".password-wrap .btn",
+    );
+    const input = document.getElementById(
+        "password",
+    ) as HTMLInputElement | null;
+
+    toggle?.addEventListener("click", () => {
+        if (!input) return;
+        const show = input.type === "password";
+        input.type = show ? "text" : "password";
+        toggle.setAttribute(
+            "aria-label",
+            show ? "Ocultar contraseña" : "Mostrar contraseña",
+        );
+    });
+</script>
