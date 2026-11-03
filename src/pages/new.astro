@@ -12,6 +12,19 @@ const categories = [
 ---
 
 <BaseLayout title="Nuevo hilo">
+    <Fragment slot="head">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css"
+        />
+        <script
+            is:inline
+            src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js"
+        >
+            import { actions } from "astro:actions";
+        </script>
+    </Fragment>
+
     <main class="main">
         <div class="profile-narrow">
             <div class="page-intro">
@@ -103,7 +116,12 @@ const categories = [
                     </div>
                 </fieldset>
 
-                <div class="editor"></div>
+                <div class="field">
+                    <label class="field-label" for="thread-body">
+                        Contenido
+                    </label>
+                    <textarea id="thread-body" name="body"></textarea>
+                </div>
 
                 <div class="thread-actions" style="justify-content: flex-end">
                     <a href="/" class="btn btn--ghost">
@@ -117,3 +135,31 @@ const categories = [
         </div>
     </main>
 </BaseLayout>
+
+<script is:inline>
+    new EasyMDE({
+        element: document.getElementById("thread-body"),
+        spellChecker: false,
+        status: false,
+        minHeight: "300px",
+        placeholder: "Escribe en Markdown...",
+        toolbar: [
+            "bold",
+            "italic",
+            "heading",
+            "|",
+            "quote",
+            "unordered-list",
+            "ordered-list",
+            "|",
+            "link",
+            "code",
+            "|",
+            "preview",
+            "side-by-side",
+            "fullscreen",
+            "|",
+            "guide",
+        ],
+    });
+</script>

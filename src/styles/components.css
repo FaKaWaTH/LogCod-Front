@@ -523,3 +523,47 @@
   .profile-top { flex-wrap: wrap; }
   .profile-actions { width: 100%; }
 }
+
+.field .EasyMDEContainer .CodeMirror {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.field .EasyMDEContainer .CodeMirror-cursor {
+  border-left-color: var(--text);
+}
+
+.field .EasyMDEContainer .CodeMirror-focused .CodeMirror-selected,
+.field .EasyMDEContainer .CodeMirror-selected {
+  background: var(--surface-hover);
+}
+
+.field .editor-toolbar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.field .editor-toolbar button {
+  color: var(--text-muted) !important;
+}
+
+.field .editor-toolbar button:hover,
+.field .editor-toolbar button.active {
+  background: var(--surface-hover);
+  border-color: var(--border);
+  color: var(--text) !important;
+}
+
+.field .editor-toolbar i.separator {
+  border-left-color: var(--border);
+  border-right-color: transparent;
+}
+
+.field .editor-preview,
+.field .editor-preview-side {
+  background: var(--surface);
+  color: var(--text);
+}

@@ -21,6 +21,7 @@ const { title, showHeader = true } = Astro.props;
             content="Conversaciones técnicas, con menos ruido y más señal."
         />
         <title>{title ? `${title} · LogCod` : "LogCod"}</title>
+        <slot name="head" />
     </head>
     <body>
         {showHeader && <Header />}
