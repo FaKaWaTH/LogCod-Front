@@ -1,0 +1,163 @@
+---
+import type { User } from "../../types";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProfileHeader from "../../components/ProfileHeader.astro";
+import ThreadCard from "../../components/ThreadCard.astro";
+
+export function getStaticPaths() {
+    const users: User[] = [
+        {
+            username: "maya",
+            firstName: "Maya",
+            name: "Maya Chen",
+            initials: "MC",
+            bio: "Backend engineer. Building reliable systems, one boring decision at a time. Currently working on",
+            highlight: "payments infrastructure",
+            bioEnd: "Writing about failure, good tooling, and the human side of on-call.",
+            website: { label: "mayachen.dev", url: "https://mayachen.dev" },
+            location: "San Francisco, CA",
+            joined: "March 2024",
+            threadCount: 24,
+            isFriend: true,
+            publicThreads: [
+                {
+                    category: "Engineering",
+                    title: "Retries are not a resilience strategy",
+                    time: "2h ago",
+                    comments: 3,
+                    excerpt:
+                        "We added exponential backoff and still took down our payments service. Here's what finally worked: bounded retries, jitter, and a shared retry budget.",
+                },
+                {
+                    category: "Engineering",
+                    title: "The timeout is part of your API",
+                    time: "3 days ago",
+                    comments: 14,
+                    excerpt:
+                        "A timeout is a promise to your caller. Here's how we picked values that reflect the work a request actually does, instead of copying the default.",
+                },
+                {
+                    category: "Engineering",
+                    title: "What our incident reviews were missing",
+                    time: "1 week ago",
+                    comments: 21,
+                    excerpt:
+                        "We stopped asking who changed the code and started asking what made the change look safe. A small shift that made our reviews much more useful.",
+                },
+            ],
+            privateThreads: [],
+            publicCount: 21,
+            privateCount: 3,
+        },
+    ];
+
+    return users.map((user) => ({
+        params: { username: user.username },
+        props: { user },
+    }));
+}
+
+const { user } = Astro.props;
+---
+
+<BaseLayout title={`${user.name} (@${user.username}) · LogCod`}>
+    <main class="main">
+        <div class="profile-narrow">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/">Inicio</a>
+                <span>›</span>
+                <a href="/people">Personas</a>
+                <span>›</span>
+                <span>@{user.username}</span>
+            </nav>
+
+            <ProfileHeader user={user} isFriend={user.isFriend} />
+
+            <div class="tabs" role="tablist">
+                <button
+                    class="tab is-active"
+                    role="tab"
+                    data-tab="public"
+                    type="button"
+                >
+                    Hilos Públicos<span class="tab-sep">·</span>
+                    {user.publicCount}
+                </button>
+                {user.isFriend && (
+                    <button
+                        class="tab"
+                        role="tab"
+                        data-tab="private"
+                        type="button"
+                    >
+                        Hilos Privados<span class="tab-sep">·</span>
+                        {user.privateCount}
+                    </button>
+                )}
+            </div>
+
+            <section class="tab-panel" data-panel="public">
+                <div class="feed">
+                    {user.publicThreads.map((t) => (
+                        <ThreadCard
+                            title={t.title}
+                            href={t.href ?? "#"}
+                            author={`@${user.username}`}
+                            authorInitials={user.initials}
+                            time={t.time}
+                            excerpt={t.excerpt}
+                            comments={t.comments}
+                            category={t.category}
+                            visibility="PUBLIC"
+                            showReport
+                        />
+                    ))}
+                </div>
+                <p class="profile-footnote">
+                    Ultimos hilos de {user.firstName}
+                </p>
+            </section>
+
+            {user.isFriend && (
+                <section class="tab-panel" data-panel="private" hidden>
+                    <div class="thread-list">
+                        {user.privateThreads.length === 0 && (
+                            <p class="profile-footnote">
+                                {" "}
+                                No hay threads privados para mostrar todavía.
+                            </p>
+                        )}
+
+                        {user.privateThreads.map((t) => (
+                            <ThreadCard
+                                title={t.title}
+                                href={t.href ?? "#"}
+                                author={`@${user.username}`}
+                                authorInitials={user.initials}
+                                time={t.time}
+                                excerpt={t.excerpt}
+                                comments={t.comments}
+                                category={t.category}
+                                visibility="PRIVATE"
+                                showReport
+                            />
+                        ))}
+                    </div>
+                </section>
+            )}
+        </div>
+    </main>
+</BaseLayout>
+
+<script>
+    const tabs = document.querySelectorAll<HTMLButtonElement>(".tab");
+    const panels = document.querySelectorAll<HTMLElement>(".tab-panel");
+
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const target = tab.dataset.tab;
+            tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+            panels.forEach((p) => (p.hidden = p.dataset.panel !== target));
+        });
+    });
+</script>

@@ -8,7 +8,7 @@ interface Props {
     excerpt: string;
     comments: number;
     category: string;
-    visibility: "public" | "private";
+    visibility: "PUBLIC" | "PRIVATE";
     showReport?: boolean;
 }
 
@@ -25,7 +25,7 @@ const {
     showReport = false,
 } = Astro.props;
 
-const isPrivate = visibility === "private";
+const isPrivate = visibility === "PRIVATE";
 const commentsLabel =
     comments === 1 ? "1 comentario" : `${comments} comentarios`;
 
@@ -35,7 +35,7 @@ const lockIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" st
 ---
 
 <article class="thread">
-    <div class="thread__tags">
+    <div class="thread-tags">
         <span class="tag">{category}</span>
         {isPrivate ? (
             <span class="tag tag--private">
@@ -47,27 +47,27 @@ const lockIcon = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" st
         )}
     </div>
 
-    <h3 class="thread__title">
+    <h3 class="thread-title">
         <a href={href}>{title}</a>
     </h3>
 
-    <div class="thread__meta">
-        <span class="avatar">{authorInitials}</span>
-        <a href="">
+    <div class="thread-meta">
+        <span class="avatar avatar--sm">{authorInitials}</span>
+        <a href={`/people/${author.replace("@", "")}`}>
             <strong>{author}</strong>
         </a>
         <span aria-hidden="true">·</span>
         <time>{time}</time>
     </div>
 
-    <p class="thread__excerpt">{excerpt}</p>
+    <p class="thread-excerpt">{excerpt}</p>
 
-    <div class="thread__footer">
+    <div class="thread-footer">
         <a href={href} class="link-action">
             <span set:html={commentIcon} />
             {commentsLabel}
         </a>
-        <div class="thread__actions">
+        <div class="thread-actions">
             <button type="button" class="link-action">
                 <span set:html={shareIcon} />
                 Compartir

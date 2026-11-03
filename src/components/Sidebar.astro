@@ -17,15 +17,15 @@ const guidelines = [
 
 <aside class="sidebar" aria-label="Información de la comunidad">
     <section class="panel" aria-labelledby="categories-title">
-        <h2 class="panel__title" id="categories-title">
+        <h2 class="panel-title" id="categories-title">
             Explorar categorías
         </h2>
-        <ul class="panel__list">
+        <ul class="panel-list">
             {categories.map((c) => (
                 <li>
                     <a href={c.href}>
                         <span>{c.name}</span>
-                        <span class="panel__count">{c.count}</span>
+                        <span class="panel-count">{c.count}</span>
                     </a>
                 </li>
             ))}
@@ -33,21 +33,21 @@ const guidelines = [
     </section>
 
     <section class="panel guidelines" aria-labelledby="guidelines-title">
-        <h2 class="panel__title" id="guidelines-title">
+        <h2 class="panel-title" id="guidelines-title">
             Menos ruido, más señal
         </h2>
         <p>Un rincón tranquilo de internet para conversar sobre con calma.</p>
         <ol>
             {guidelines.map((g, i) => (
                 <li>
-                    <span class="guidelines__index">
+                    <span class="guidelines-index">
                         {String(i + 1).padStart(2, "0")}
                     </span>
                     <span>{g}</span>
                 </li>
             ))}
         </ol>
-        <a href="/guidelines" class="guidelines__link">
+        <a href="/guidelines" class="guidelines-link">
             Leer las pautas de la comunidad
             <span aria-hidden="true">↗</span>
         </a>

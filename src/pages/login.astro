@@ -6,16 +6,16 @@ const hasError = Astro.url.searchParams.get("error") === "1";
 
 <BaseLayout title="Iniciar sesión" showHeader={false}>
     <main class="auth">
-        <section class="auth__card" aria-labelledby="login-title">
-            <a href="/" class="brand" aria-label="Stackline, inicio">
+        <section class="auth-card" aria-labelledby="login-title">
+            <a href="/" class="brand" aria-label="LogCod, inicio">
                 <span>LogCod</span>
             </a>
 
             <div>
-                <h1 class="auth__title" id="login-title">
+                <h1 class="auth-title" id="login-title">
                     Inicia sesión LogCod
                 </h1>
-                <p class="auth__sub">
+                <p class="auth-sub">
                     ¿No tienes cuenta? <a href="/register">Regístrate</a>
                 </p>
             </div>
@@ -43,9 +43,9 @@ const hasError = Astro.url.searchParams.get("error") === "1";
                 </div>
             )}
 
-            <form class="auth__form" method="post" action="/api/login">
+            <form class="auth-form" method="post" action="/api/login">
                 <div class="field">
-                    <label class="field__label" for="username">
+                    <label class="field-label" for="username">
                         Usuario
                     </label>
                     <input
@@ -59,7 +59,7 @@ const hasError = Astro.url.searchParams.get("error") === "1";
                 </div>
 
                 <div class="field">
-                    <label class="field__label" for="password">
+                    <label class="field-label" for="password">
                         Contraseña
                     </label>
                     <div class="password-wrap">
@@ -102,7 +102,7 @@ const hasError = Astro.url.searchParams.get("error") === "1";
                 </button>
             </form>
 
-            <p class="auth__tagline">
+            <p class="auth-tagline">
                 Conversaciones con criterio. Bienvenida de nuevo.
             </p>
         </section>

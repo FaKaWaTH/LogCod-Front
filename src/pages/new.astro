@@ -24,13 +24,13 @@ const categories = [
             </div>
 
             <form
-                class="auth__form"
+                class="auth-form"
                 action="/api/threads"
                 method="post"
                 style="gap: var(--space-6)"
             >
                 <div class="field">
-                    <label class="field__label" for="thread-title">
+                    <label class="field-label" for="thread-title">
                         Título
                     </label>
                     <input
@@ -45,7 +45,7 @@ const categories = [
                 </div>
 
                 <div class="field">
-                    <label class="field__label" for="thread-category">
+                    <label class="field-label" for="thread-category">
                         Categoría
                     </label>
                     <select id="thread-category" name="category" class="select">
@@ -57,13 +57,13 @@ const categories = [
 
                 <fieldset class="field" style="border:0;padding:0;margin:0">
                     <legend
-                        class="field__label"
+                        class="field-label"
                         style="margin-bottom: var(--space-2)"
                     >
                         Visibilidad
                     </legend>
                     <div class="visibility">
-                        <label class="visibility__option">
+                        <label class="visibility-option">
                             <input
                                 type="radio"
                                 name="visibility"
@@ -72,17 +72,17 @@ const categories = [
                             />
                             <span>
                                 <span
-                                    class="visibility__title"
+                                    class="visibility-title"
                                     style="display:block"
                                 >
                                     Público
                                 </span>
-                                <span class="visibility__desc">
+                                <span class="visibility-desc">
                                     Todos pueden ver este hilo.
                                 </span>
                             </span>
                         </label>
-                        <label class="visibility__option">
+                        <label class="visibility-option">
                             <input
                                 type="radio"
                                 name="visibility"
@@ -90,12 +90,12 @@ const categories = [
                             />
                             <span>
                                 <span
-                                    class="visibility__title"
+                                    class="visibility-title"
                                     style="display:block"
                                 >
                                     Privado
                                 </span>
-                                <span class="visibility__desc">
+                                <span class="visibility-desc">
                                     Solo lo ven tus amigos confirmados.
                                 </span>
                             </span>
@@ -105,7 +105,7 @@ const categories = [
 
                 <div class="editor"></div>
 
-                <div class="thread__actions" style="justify-content: flex-end">
+                <div class="thread-actions" style="justify-content: flex-end">
                     <a href="/" class="btn btn--ghost">
                         Cancelar
                     </a>

@@ -1,0 +1,101 @@
+---
+import type { User } from "../types";
+
+interface Props {
+    user: User;
+    isFriend?: boolean;
+}
+
+const { user, isFriend = false } = Astro.props;
+---
+
+<section class="profile-card">
+    <div class="profile-top">
+        <div class="avatar avatar--lg">{user.initials}</div>
+
+        <div class="profile-id">
+            <h1>{user.name}</h1>
+            <span class="profile-handle">@{user.username}</span>
+        </div>
+
+        <div class="profile-actions">
+            <button class="btn btn--outline" type="button">
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                {isFriend ? "Friends" : "Add friend"}
+            </button>
+            <button
+                class="btn btn--outline btn--icon"
+                type="button"
+                aria-label="Más opciones"
+            >
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="m6 9 6 6 6-6" />
+                </svg>
+            </button>
+            <button class="btn btn--ghost" type="button">
+                <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                >
+                    <path d="M4 22V4m0 0h14l-2 5 2 5H4" />
+                </svg>
+                Report
+            </button>
+        </div>
+    </div>
+
+    <p class="profile-bio">
+        {user.bio} <strong>{user.highlight}</strong>. {user.bioEnd}{" "}
+        <a href={user.website.url} target="_blank" rel="noopener">
+            {user.website.label} ↗
+        </a>
+    </p>
+
+    <ul class="profile-meta">
+        <li>{user.location}</li>
+        <li>Joined {user.joined}</li>
+        <li>{user.threadCount} Hilos</li>
+    </ul>
+</section>
+
+<>
+    {isFriend && (
+        <div class="notice">
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+            >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <span>
+                Tu y {user.firstName} son amigos. Puedes ver sus hilos privados
+            </span>
+        </div>
+    )}
+</>

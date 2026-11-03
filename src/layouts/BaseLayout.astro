@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import "../styles/components.css";
 import "../styles/layout.css";
-import Header from "../components/Hearder.astro";
+import Header from "../components/Header.astro";
 
 interface Props {
     title?: string;
@@ -20,7 +20,7 @@ const { title, showHeader = true } = Astro.props;
             name="description"
             content="Conversaciones técnicas, con menos ruido y más señal."
         />
-        <title>LogCod</title>
+        <title>{title ? `${title} · LogCod` : "LogCod"}</title>
     </head>
     <body>
         {showHeader && <Header />}
